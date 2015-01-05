@@ -4,11 +4,11 @@ using System.Reflection;
 [assembly: AssemblyTitleAttribute("Elders.Proteus")]
 [assembly: AssemblyDescriptionAttribute("Elders.Proteus")]
 [assembly: AssemblyProductAttribute("Elders.Proteus")]
-[assembly: AssemblyVersionAttribute("1.0.0")]
-[assembly: AssemblyInformationalVersionAttribute("1.0.0")]
-[assembly: AssemblyFileVersionAttribute("1.0.0")]
+[assembly: AssemblyVersionAttribute("1.0.2")]
+[assembly: AssemblyInformationalVersionAttribute("1.0.2")]
+[assembly: AssemblyFileVersionAttribute("1.0.2")]
 namespace System {
     internal static class AssemblyVersionInformation {
-        internal const string Version = "1.0.0";
+        internal const string Version = "1.0.2";
     }
 }

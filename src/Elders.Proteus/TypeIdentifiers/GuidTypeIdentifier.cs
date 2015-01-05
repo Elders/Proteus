@@ -50,7 +50,7 @@ namespace Elders.Proteus
                     continue;
                 if (types.ContainsKey(gd))
                 {
-                    var message = String.Format("DUPLOCATE CONTRACT NAME '{0}', Type 1 '{1}' Type 2 '{2}' ", item.FullName);
+                    var message = String.Format("DUPLICATE CONTRACT NAME '{0}', Type 1 '{1}' Type 2 '{2}' ", item.FullName);
                     System.Diagnostics.Trace.WriteLine(message);
                     throw new InvalidDataContractException(message);
                 }
@@ -67,7 +67,7 @@ namespace Elders.Proteus
                 return id.ToByteArray();
             else
             {
-                var msg = String.Format("Unknown-Unregistered type: {0}. All types that are using runtime type inheritance should have DataContract Attribute. If this is a value type please use it as is, don't wrap it into object. If you still want to wrap it into object declare a new class with DataContractAttrbute and use the concrete type there", type.FullName);
+                var msg = String.Format("Unknown/Unregistered type: {0}. All types that are using runtime type inheritance should have DataContract Attribute. If this is a value type please use it as is, don't wrap it into object. If you still want to wrap it into object declare a new class with DataContractAttrbute and use the concrete type there", type.FullName);
                 throw new InvalidOperationException(msg);
             }
 
