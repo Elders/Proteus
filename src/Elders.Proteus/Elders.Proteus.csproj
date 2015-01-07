@@ -37,8 +37,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Proxy\Class1.cs" />
     <Compile Include="Proxy\RuntimeProxyBuilder.cs" />
     <Compile Include="Proxy\RuntimeProxyDefinition.cs" />
     <Compile Include="StreamExensions.cs" />

@@ -1,0 +1,47 @@
+﻿using System;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Text;
+using System.Threading.Tasks;
+using Machine.Specifications;
+
+namespace Elders.Proteus.Tests
+{
+    [Subject(typeof(Serializer))]
+    public class Whem_serializing_nested_type_undefinded_baseclass_inheritance_with_base_class_instance
+    {
+
+        Establish context = () =>
+        {
+            ser = new NestedTypeWithBaseClassInheritance() { Int = 5, Date = DateTime.UtcNow.AddDays(1), String = "a", Nested = new UndefinedBaseClass() { CustomBaseBaseClassString = "test string" } };
+            ser.Nested.CustomBaseClassString = "Custom string";
+            ser.Nested.CustomBaseBaseClassString = "UHAAA";
+            serializer = new Serializer();
+            serializer2 = new Serializer();
+            serStream = new MemoryStream();
+            serializer.SerializeWithHeaders(serStream, ser);
+            serStream.Position = 0;
+        };
+        Because of_deserialization = () => { deser = (NestedTypeWithBaseClassInheritance)serializer2.DeserializeWithHeaders(serStream); };
+
+
+        It should_not_be_null = () => deser.ShouldNotBeNull();
+        It should_have_the_same_int = () => deser.Int.ShouldEqual(ser.Int);
+        It should_have_the_same_string = () => deser.String.ShouldEqual(ser.String);
+        It should_have_the_same_date = () => deser.Date.ShouldEqual(ser.Date);
+        It should_have_the_same_date_as_utc = () => deser.Date.ToFileTimeUtc().ShouldEqual(ser.Date.ToFileTimeUtc());
+
+        It nested_object_should_not_be_null = () => deser.Nested.ShouldNotBeNull();
+        It nested_object_should_be_of_the_right_type = () => deser.Nested.ShouldBeOfExactType(typeof(UndefinedBaseClass));
+        It nested_objects_should_contain_base_properties = () => ser.Nested.CustomBaseClassString.ShouldEqual(deser.Nested.CustomBaseClassString);
+        It nested_objects_should_contain_bases_base_properties = () => ser.Nested.CustomBaseBaseClassString.ShouldEqual(deser.Nested.CustomBaseBaseClassString);
+
+
+
+        static NestedTypeWithBaseClassInheritance ser;
+        static NestedTypeWithBaseClassInheritance deser;
+        static Stream serStream;
+        static Serializer serializer;
+        static Serializer serializer2;
+    }
+}

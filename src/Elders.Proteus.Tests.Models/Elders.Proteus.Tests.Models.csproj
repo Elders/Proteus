@@ -40,6 +40,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="Elders.Cronus.DomainModeling\AggregateRoot.cs" />
+    <Compile Include="Elders.Cronus.DomainModeling\AggregateRootApplicationService.cs" />
+    <Compile Include="Elders.Cronus.DomainModeling\AggregateRootException.cs" />
+    <Compile Include="Elders.Cronus.DomainModeling\AggregateRootId.cs" />
+    <Compile Include="Elders.Cronus.DomainModeling\AggregateRootState.cs" />
+    <Compile Include="Elders.Cronus.DomainModeling\BoundedContextAttribute.cs" />
+    <Compile Include="Elders.Cronus.DomainModeling\GuidId.cs" />
+    <Compile Include="Elders.Cronus.DomainModeling\IAggregateRepository.cs" />
+    <Compile Include="Elders.Cronus.DomainModeling\IAggregateRoot.cs" />
+    <Compile Include="Elders.Cronus.DomainModeling\IAggregateRootId.cs" />
+    <Compile Include="Elders.Cronus.DomainModeling\IAggregateRootState.cs" />
+    <Compile Include="Elders.Cronus.DomainModeling\IAggregateRootStateManager.cs" />
+    <Compile Include="Elders.Cronus.DomainModeling\ICommand.cs" />
+    <Compile Include="Elders.Cronus.DomainModeling\ICommandHandler.cs" />
+    <Compile Include="Elders.Cronus.DomainModeling\IEvent.cs" />
+    <Compile Include="Elders.Cronus.DomainModeling\IEventHandler.cs" />
+    <Compile Include="Elders.Cronus.DomainModeling\IMessage.cs" />
+    <Compile Include="Elders.Cronus.DomainModeling\IPort.cs" />
+    <Compile Include="Elders.Cronus.DomainModeling\IProjection.cs" />
+    <Compile Include="Elders.Cronus.DomainModeling\IPublisher.cs" />
+    <Compile Include="Elders.Cronus.DomainModeling\IValueObject.cs" />
+    <Compile Include="Elders.Cronus.DomainModeling\MessageInfo.cs" />
+    <Compile Include="Elders.Cronus.DomainModeling\TransportMessage.cs" />
     <Compile Include="NestedTypeWithNonDataContractTypes.cs" />
     <Compile Include="NestedTypeWithBaseClassInheritance.cs" />
     <Compile Include="NestedTypeWithDctionaryInheritance.cs" />
@@ -52,6 +76,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleType.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
