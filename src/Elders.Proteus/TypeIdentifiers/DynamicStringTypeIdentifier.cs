@@ -55,7 +55,7 @@ namespace Elders.Proteus
                 types.Add(attribute.Name, item);
             }
         }
-        
+
 
         public byte[] GetTypeId(Type type)
         {
@@ -82,5 +82,16 @@ namespace Elders.Proteus
         public bool IsDynamicLenght { get { return true; } }
 
         public int Lenght { get { throw new InvalidOperationException("This identifier is with dynamic lenght"); } }
+
+
+        public Dictionary<string, Type> Types
+        {
+            get { return types; }
+        }
+
+        public Dictionary<Type, string> Ids
+        {
+            get { return ids; }
+        }
     }
 }

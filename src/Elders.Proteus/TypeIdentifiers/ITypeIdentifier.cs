@@ -15,6 +15,12 @@ namespace Elders.Proteus
         Type GetTypeById(byte[] id);
         bool IsDynamicLenght { get; }
         int Lenght { get; }
+
         IEnumerable<Type> AvailableTypes { get; }
+
+        Dictionary<string, Type> Types { get; }
+
+        Dictionary<Type, string> Ids { get; }
+
     }
 }

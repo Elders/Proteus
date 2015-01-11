@@ -61,9 +61,9 @@
     <Compile Include="runtime-type-discovery\When_serializng_simple_type_with_headers.cs" />
     <Compile Include="runtime-type-inheritence-model\Whem_serializing_nested_type_with_non_datacontract_types.cs" />
     <Compile Include="runtime-type-inheritence-model\Whem_serializing_nested_type_with_dictionary.cs" />
-    <Compile Include="runtime-type-inheritence-model\Whem_serializing_nested_type_undefinded_baseclass_inheritance.cs" />
     <Compile Include="runtime-type-inheritence-model\Whem_serializing_nested_type_undefinded_object_inheritance.cs" />
     <Compile Include="runtime-type-inheritence-model\Whem_serializing_nested_type_undefinded_interface_inheritance.cs" />
+    <Compile Include="stackoverflow\Whem_stackoverflow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
