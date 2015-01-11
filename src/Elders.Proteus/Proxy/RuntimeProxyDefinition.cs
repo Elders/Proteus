@@ -19,7 +19,6 @@ namespace Elders.Proteus.Conversion
         public RuntimeProxy(object value)
         {
             Id = Identifier.GetTypeId(value.GetType());
-
             var str = new MemoryStream();
             Model.Serialize(str, value);
             Wraper = str.ToArray();
@@ -32,17 +31,9 @@ namespace Elders.Proteus.Conversion
         [DataMember(Order = 2)]
         public byte[] Id { get; set; }
 
-        public object Restore()
-        {
-            return Id == null ?
-                     null
-                     :
-                     Model.Deserialize(new MemoryStream(Wraper), null, Identifier.GetTypeById(Id));
-        }
-
         public static implicit operator T(RuntimeProxy<T, V> value)
         {
-            return (T)value.Restore();
+            return (T)Model.Deserialize(new MemoryStream(value.Wraper), null, Identifier.GetTypeById(value.Id));
         }
 
         public static implicit operator RuntimeProxy<T, V>(T value)
@@ -51,6 +42,7 @@ namespace Elders.Proteus.Conversion
         }
 
         public static ITypeIdentifier Identifier;
+
         public static ProtoBuf.Meta.RuntimeTypeModel Model;
     }
 

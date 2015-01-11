@@ -18,9 +18,5 @@ namespace Elders.Proteus
 
         IEnumerable<Type> AvailableTypes { get; }
 
-        Dictionary<string, Type> Types { get; }
-
-        Dictionary<Type, string> Ids { get; }
-
     }
 }
