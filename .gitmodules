@@ -1,0 +1,3 @@
+[submodule "protobuf-net"]
+	path = protobuf-net
+	url = git@github.com:Elders/protobuf-net.git

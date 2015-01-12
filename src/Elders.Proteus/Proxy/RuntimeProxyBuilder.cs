@@ -19,7 +19,7 @@ namespace Elders.Proteus.Conversion
             assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(asmName, AssemblyBuilderAccess.Run);
             moduleBuilder = assemblyBuilder.DefineDynamicModule(assemblyName + ".Module");
         }
-        public static Type BuildDynamicProxy(Type actualType, Guid proxyCreatorId, Serializer serializer)
+        public static Type BuildDynamicProxy(Type actualType, Guid proxyCreatorId)
         {
             var genericType = typeof(RuntimeProxy<,>);
             string proxyTypeName = actualType.FullName + "_" + proxyCreatorId.ToString().Replace("-", "_");
@@ -29,8 +29,7 @@ namespace Elders.Proteus.Conversion
             var proxy = factoryTypeBuilder.CreateType();
             var concreteType = genericType.MakeGenericType(actualType, proxy);
 
-            var field = concreteType.GetField("Serializer", BindingFlags.Static | BindingFlags.Public);
-            field.SetValue(null, serializer);
+            
             return concreteType;
         }
     }

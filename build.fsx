@@ -15,7 +15,8 @@ let excludePaths (pathsToExclude : string list) (path: string) = pathsToExclude 
 
 let applicationName = getBuildParamOrDefault "applicationName" ""
 let applicationProjFile = @".\src\" @@ applicationName @@ applicationName + @".csproj"
-let buildDir  = @"./bin/Release" @@ applicationName
+let buildDir  = @"bin\Release" @@ applicationName
+let mergedDir = @"bin\Release" @@ applicationName + ".Merged"
 let release = LoadReleaseNotes "RELEASE_NOTES.md"
 
 let projectName = "Proteus"
@@ -57,12 +58,21 @@ Target "RestorePackages" (fun _ ->
 Target "CreateNuGet" (fun _ ->
     for package,description in packages do
     
-        let nugetToolsDir = nugetDir @@ "lib" @@ "net40-full"
+        let nugetToolsDir = nugetDir @@ "lib" @@ "net45-full"
         CleanDir nugetToolsDir
+        
+        CreateDir mergedDir
+        let mergedDll = mergedDir @@ applicationName + ".dll"
+        let primary = buildDir @@ applicationName + ".dll"
+        let secondary = buildDir @@ "protobuf-net.dll"
+        let paramss = "/out:" + mergedDll + " " + primary + " " + secondary + " /internalize /targetplatform:v4"
+        let result = ExecProcess (fun info ->  
+            info.FileName <- "./tools/ILMerge/ILMerge.exe"
+            info.Arguments <- paramss) System.TimeSpan.MaxValue
 
         match package with
         | p when p = projectName ->
-            CopyDir nugetToolsDir buildDir excludeNugetDependencies
+            CopyDir nugetToolsDir mergedDir excludeNugetDependencies
         | _ -> ()
         
         let nuspecFile = package + ".nuspec"
@@ -83,6 +93,7 @@ Target "CreateNuGet" (fun _ ->
 )
 
 Target "Release" (fun _ ->
+
     StageAll ""
     let notes = String.concat "; " release.Notes
     Commit "" (sprintf "Bump version to %s. %s" release.NugetVersion notes)
