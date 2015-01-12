@@ -1,3 +1,7 @@
+#### 1.0.3 - 12.01.2015
+* Fix bug with nested serialization
+* Allow deserialization of private property on base class
+
 #### 1.0.2 - 05.01.2015
 * Improve error messages
 
