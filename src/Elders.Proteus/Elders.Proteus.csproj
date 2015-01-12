@@ -36,6 +36,10 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="Proxy\ITypeIdentifierExtensions.cs" />
+    <Compile Include="Proxy\ProxyBuilder.cs" />
+    <Compile Include="Proxy\ProxyFactory.cs" />
     <Compile Include="Proxy\RuntimeProxyBuilder.cs" />
     <Compile Include="Proxy\RuntimeProxyDefinition.cs" />
     <Compile Include="StreamExensions.cs" />
