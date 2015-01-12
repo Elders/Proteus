@@ -46,6 +46,8 @@ namespace Elders.Proteus.Tests.proxy
 
         It should_not_be_null = () => deser.ShouldNotBeNull();
 
+        It should_be_of_exact_value = () => typeof(BaseClass).GetProperty("BaseProperty", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).GetValue(deser).ShouldEqual("base value");
+
 
         static ToProxy ser;
         static ToProxy deser;
