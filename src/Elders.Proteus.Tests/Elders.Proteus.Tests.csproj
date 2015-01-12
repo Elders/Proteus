@@ -39,10 +39,6 @@
     <Reference Include="Machine.Specifications.Should">
       <HintPath>..\packages\Machine.Specifications.Should.0.7.2\lib\net45\Machine.Specifications.Should.dll</HintPath>
     </Reference>
-    <Reference Include="protobuf-net, Version=2.0.0.668, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\protobuf-net.2.0.0.668\lib\net40\protobuf-net.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -69,6 +65,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\protobuf-net\protobuf-net\protobuf-net.csproj">
+      <Project>{8374e4d7-2a91-48f1-9360-09b09cf27c3f}</Project>
+      <Name>protobuf-net</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Elders.Proteus.Tests.Models\Elders.Proteus.Tests.Models.csproj">
       <Project>{18724f0f-fe76-4a5d-8a87-c1fc323b3179}</Project>
       <Name>Elders.Proteus.Tests.Models</Name>
