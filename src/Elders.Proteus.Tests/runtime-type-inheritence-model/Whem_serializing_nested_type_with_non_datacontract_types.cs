@@ -20,7 +20,7 @@ namespace Elders.Proteus.Tests
             serializer = new Serializer();
             serializer2 = new Serializer();
             serStream = new MemoryStream();
-
+           serializer.SerializeWithHeaders(serStream, ser);
             serStream.Position = 0;
         };
         Because of_deserialization = () => { ex = Catch.Exception(() => serializer.SerializeWithHeaders(serStream, ser)); };
