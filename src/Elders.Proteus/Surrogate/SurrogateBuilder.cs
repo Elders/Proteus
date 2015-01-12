@@ -7,42 +7,42 @@ using System.Threading.Tasks;
 using Elders.Proteus.Conversion;
 using ProtoBuf.Meta;
 
-namespace Elders.Proteus.Proxy
+namespace Elders.Proteus.Surrogate
 {
-    public class ProxyBuilder
+    public class SurrogateBuilder
     {
         private readonly ITypeIdentifier identifier;
-        public ProxyBuilder(Type proxiedType, ITypeIdentifier identifier, Guid creationContext)
+        public SurrogateBuilder(Type proxiedType, ITypeIdentifier identifier, Guid creationContext)
         {
             this.identifier = identifier;
             Model = ModelBuilder.New();
-            Proxy = RuntimeProxyBuilder.BuildDynamicProxy(proxiedType, creationContext);
+            Surrogate = RuntimeSurrogateBuilder.BuildDynamicSurrogate(proxiedType, creationContext);
 
             ProxiedType = proxiedType;
         }
         bool built;
-        public Type Build(List<ProxyBuilder> allProxies)
+        public Type Build(List<SurrogateBuilder> allProxies)
         {
             if (built)
-                return Proxy;
+                return Surrogate;
             foreach (var item in allProxies)
             {
                 if (item.ProxiedType == this.ProxiedType)
                     continue;
-                Model.Add(item.ProxiedType, true).SetSurrogate(item.Proxy);
+                Model.Add(item.ProxiedType, true).SetSurrogate(item.Surrogate);
             }
 
-            var field = Proxy.GetField("Model", BindingFlags.Static | BindingFlags.Public);
+            var field = Surrogate.GetField("Model", BindingFlags.Static | BindingFlags.Public);
             field.SetValue(null, Model);
-            var idenField = Proxy.GetField("Identifier", BindingFlags.Static | BindingFlags.Public);
+            var idenField = Surrogate.GetField("Identifier", BindingFlags.Static | BindingFlags.Public);
             idenField.SetValue(null, identifier);
             
             built = true;
-            return Proxy;
+            return Surrogate;
         }
 
         RuntimeTypeModel Model { get; set; }
-        Type Proxy { get; set; }
+        Type Surrogate { get; set; }
         public Type ProxiedType { get; set; }
     }
 }

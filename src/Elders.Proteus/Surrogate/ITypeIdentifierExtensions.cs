@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Elders.Proteus.Proxy
+namespace Elders.Proteus.Surrogate
 {
     public static class ITypeIdentifierExtensions
     {

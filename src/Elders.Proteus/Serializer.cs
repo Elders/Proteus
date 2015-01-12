@@ -11,7 +11,7 @@ using ProtoBuf.Meta;
 using System.Runtime.Serialization;
 using Elders.Proteus.Conversion;
 using System.Diagnostics;
-using Elders.Proteus.Proxy;
+using Elders.Proteus.Surrogate;
 namespace Elders.Proteus
 {
     
@@ -35,14 +35,14 @@ namespace Elders.Proteus
             this.identifier = identifier;
             protobufTypeModel = ModelBuilder.New();
             List<Type> builtProxies = new List<Type>();
-            var factory = new ProxyFactory(this.identifier, Id);
+            var factory = new SurrogateFactory(this.identifier, Id);
             foreach (var item in identifier.GetAvailableTypesAndTheirSerializableParents())
             {
                 if (item.IsGenericTypeDefinition)
                     continue;
-                var proxy = factory.GetProxy(item);
-                protobufTypeModel.Add(item, false).SetSurrogate(proxy);
-                builtProxies.Add(proxy);
+                var Surrogate = factory.GetSurrogate(item);
+                protobufTypeModel.Add(item, false).SetSurrogate(Surrogate);
+                builtProxies.Add(Surrogate);
 
             }
 

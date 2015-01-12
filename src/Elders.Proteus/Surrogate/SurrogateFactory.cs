@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Elders.Proteus.Proxy
+namespace Elders.Proteus.Surrogate
 {
-    public class ProxyFactory
+    public class SurrogateFactory
     {
         private readonly Guid creationContext;
-        private Dictionary<Type, ProxyBuilder> builders = new Dictionary<Type, ProxyBuilder>();
+        private Dictionary<Type, SurrogateBuilder> builders = new Dictionary<Type, SurrogateBuilder>();
         private readonly ITypeIdentifier identifier;
         private Dictionary<Type, Type> proxies = new Dictionary<Type, Type>();
-        public ProxyFactory(ITypeIdentifier identifier, Guid creationContext)
+        public SurrogateFactory(ITypeIdentifier identifier, Guid creationContext)
         {
             this.identifier = identifier;
             this.creationContext = creationContext;
@@ -20,17 +20,17 @@ namespace Elders.Proteus.Proxy
             {
                 if (item.IsGenericTypeDefinition)
                     continue;
-                builders.Add(item, new ProxyBuilder(item, identifier, creationContext));
+                builders.Add(item, new SurrogateBuilder(item, identifier, creationContext));
             }
 
             foreach (var item in builders.ToList())
             {
-                var proxy = item.Value.Build(builders.Select(x => x.Value).ToList());
-                proxies.Add(item.Value.ProxiedType, proxy);
+                var Surrogate = item.Value.Build(builders.Select(x => x.Value).ToList());
+                proxies.Add(item.Value.ProxiedType, Surrogate);
             }
         }
 
-        public Type GetProxy(Type type)
+        public Type GetSurrogate(Type type)
         {
             return proxies[type];
         }

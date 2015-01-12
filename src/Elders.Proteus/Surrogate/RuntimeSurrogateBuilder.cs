@@ -8,26 +8,26 @@ using System.Threading.Tasks;
 
 namespace Elders.Proteus.Conversion
 {
-    public static class RuntimeProxyBuilder
+    public static class RuntimeSurrogateBuilder
     {
-        static string assemblyName = "Elders.Reflection.Runtime";
+        static string assemblyName = "Elders.Reflection.Runtime.Surrogate";
         static AssemblyBuilder assemblyBuilder;
         static ModuleBuilder moduleBuilder;
-        static RuntimeProxyBuilder()
+        static RuntimeSurrogateBuilder()
         {
             AssemblyName asmName = new AssemblyName(assemblyName);
             assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(asmName, AssemblyBuilderAccess.Run);
             moduleBuilder = assemblyBuilder.DefineDynamicModule(assemblyName + ".Module");
         }
-        public static Type BuildDynamicProxy(Type actualType, Guid proxyCreatorId)
+        public static Type BuildDynamicSurrogate(Type actualType, Guid SurrogateCreatorId)
         {
-            var genericType = typeof(RuntimeProxy<,>);
-            string proxyTypeName = actualType.FullName + "_" + proxyCreatorId.ToString().Replace("-", "_");
-            var factoryTypeBuilder = moduleBuilder.DefineType(proxyTypeName, TypeAttributes.Class | TypeAttributes.Public, null, new Type[] { });
+            var genericType = typeof(RuntimeSurrogate<,>);
+            string SurrogateTypeName = actualType.FullName + "_" + SurrogateCreatorId.ToString().Replace("-", "_");
+            var factoryTypeBuilder = moduleBuilder.DefineType(SurrogateTypeName, TypeAttributes.Class | TypeAttributes.Public, null, new Type[] { });
             factoryTypeBuilder.DefineDefaultConstructor(MethodAttributes.Public);
 
-            var proxy = factoryTypeBuilder.CreateType();
-            var concreteType = genericType.MakeGenericType(actualType, proxy);
+            var Surrogate = factoryTypeBuilder.CreateType();
+            var concreteType = genericType.MakeGenericType(actualType, Surrogate);
 
             
             return concreteType;
