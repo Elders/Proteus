@@ -1,3 +1,6 @@
+#### 1.0.5 - 12.01.2015
+* Properly deserialize empty collections
+
 #### 1.0.4 - 12.01.2015
 * Remove protobuf-net reference
 

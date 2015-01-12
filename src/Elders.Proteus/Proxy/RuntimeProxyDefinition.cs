@@ -33,7 +33,9 @@ namespace Elders.Proteus.Conversion
 
         public static implicit operator T(RuntimeProxy<T, V> value)
         {
-            return (T)Model.Deserialize(new MemoryStream(value.Wraper), null, Identifier.GetTypeById(value.Id));
+            return (value == null || value.Wraper == null || value.Wraper.Length == 0)
+                ? default(T)
+                : (T)Model.Deserialize(new MemoryStream(value.Wraper), null, Identifier.GetTypeById(value.Id));
         }
 
         public static implicit operator RuntimeProxy<T, V>(T value)
