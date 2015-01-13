@@ -51,7 +51,7 @@ namespace Elders.Proteus.Performance
             RuntimeTypeModel.Default.Add(typeof(object), true).AddSubType(500, typeof(SimpleObject));
             MeasureDeserialization("Deserialization Complex Object 1000000 times ", complex, 100000);
             MeasureSerialization("Serializing Complex Object 1000000 times ", complex, 100000);
-            
+
             Console.ReadLine();
         }
 
@@ -62,9 +62,9 @@ namespace Elders.Proteus.Performance
             var proteusResult = MeasureExecutionTime.Start(() => guidProteus.SerializeWithHeaders(new MemoryStream(), instance), numberofTimes);
             Console.WriteLine("Guid Proteus: " + proteusResult);
 
-            stringProteus.SerializeWithHeaders(new MemoryStream(), instance);
-            var sproteusResult = MeasureExecutionTime.Start(() => stringProteus.SerializeWithHeaders(new MemoryStream(), instance), numberofTimes);
-            Console.WriteLine("String Proteus: " + sproteusResult);
+            //stringProteus.SerializeWithHeaders(new MemoryStream(), instance);
+            //var sproteusResult = MeasureExecutionTime.Start(() => stringProteus.SerializeWithHeaders(new MemoryStream(), instance), numberofTimes);
+            //Console.WriteLine("String Proteus: " + sproteusResult);
 
             protoreg.Serialize(new MemoryStream(), instance);
             var protoregResult = MeasureExecutionTime.Start(() => protoreg.Serialize(new MemoryStream(), instance), numberofTimes);
@@ -90,16 +90,16 @@ namespace Elders.Proteus.Performance
             }, numberofTimes);
             Console.WriteLine("Guid Proteus: " + proteusResult);
 
-            var sproteusStream = new MemoryStream();
-            stringProteus.SerializeWithHeaders(sproteusStream, instance);
-            sproteusStream.Position = 0;
-            var sproteusResult = MeasureExecutionTime.Start(() =>
-            {
-                sproteusStream.Position = 0;
-                var des = stringProteus.DeserializeWithHeaders(sproteusStream);
+            //var sproteusStream = new MemoryStream();
+            //stringProteus.SerializeWithHeaders(sproteusStream, instance);
+            //sproteusStream.Position = 0;
+            //var sproteusResult = MeasureExecutionTime.Start(() =>
+            //{
+            //    sproteusStream.Position = 0;
+            //    var des = stringProteus.DeserializeWithHeaders(sproteusStream);
 
-            }, numberofTimes);
-            Console.WriteLine("String Proteus: " + sproteusResult);
+            //}, numberofTimes);
+            //Console.WriteLine("String Proteus: " + sproteusResult);
 
             var protoregStream = new MemoryStream();
             protoreg.Serialize(protoregStream, instance);

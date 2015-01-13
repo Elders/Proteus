@@ -40,6 +40,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DomainModeling\AggregateRoot.cs" />
+    <Compile Include="DomainModeling\AggregateRootApplicationService.cs" />
+    <Compile Include="DomainModeling\AggregateRootException.cs" />
+    <Compile Include="DomainModeling\AggregateRootId.cs" />
+    <Compile Include="DomainModeling\AggregateRootState.cs" />
+    <Compile Include="DomainModeling\BoundedContextAttribute.cs" />
+    <Compile Include="DomainModeling\GuidId.cs" />
+    <Compile Include="DomainModeling\IAggregateRepository.cs" />
+    <Compile Include="DomainModeling\IAggregateRoot.cs" />
+    <Compile Include="DomainModeling\IAggregateRootId.cs" />
+    <Compile Include="DomainModeling\IAggregateRootState.cs" />
+    <Compile Include="DomainModeling\ICanRestoreStateFromEvents.cs" />
+    <Compile Include="DomainModeling\ICommand.cs" />
+    <Compile Include="DomainModeling\ICommandHandler.cs" />
+    <Compile Include="DomainModeling\IEvent.cs" />
+    <Compile Include="DomainModeling\IEventHandler.cs" />
+    <Compile Include="DomainModeling\IMessage.cs" />
+    <Compile Include="DomainModeling\IPort.cs" />
+    <Compile Include="DomainModeling\IProjection.cs" />
+    <Compile Include="DomainModeling\IPublisher.cs" />
+    <Compile Include="DomainModeling\IValueObject.cs" />
+    <Compile Include="DomainModeling\MessageInfo.cs" />
     <Compile Include="NestedTypeWithNonDataContractTypes.cs" />
     <Compile Include="NestedTypeWithBaseClassInheritance.cs" />
     <Compile Include="NestedTypeWithDctionaryInheritance.cs" />

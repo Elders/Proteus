@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="custom-cases\Class1.cs" />
+    <Compile Include="custom-cases\SerializableException.cs" />
     <Compile Include="default-type-identifier\When_making_an_instance_of_DefaultTypeIdentifier.cs" />
     <Compile Include="protobuf-net\Whem_serializing_nested_type.cs" />
     <Compile Include="protobuf-net\Whem_serializing_simple_type.cs" />

@@ -16,26 +16,26 @@ namespace Elders.Proteus.Conversion
         {
 
         }
+
         public RuntimeProxy(object value)
         {
-            Id = Identifier.GetTypeId(value.GetType());
+            Id = new Guid(Identifier.GetTypeId(value.GetType()));
             var str = new MemoryStream();
             Model.Serialize(str, value);
             Wraper = str.ToArray();
-
         }
 
-        [DataMember(Order = 1)]
+        [DataMember(Order = 3)]
         public byte[] Wraper { get; set; }
 
         [DataMember(Order = 2)]
-        public byte[] Id { get; set; }
+        public Guid Id { get; set; }
 
         public static implicit operator T(RuntimeProxy<T, V> value)
         {
             return (value == null || value.Wraper == null || value.Wraper.Length == 0)
                 ? default(T)
-                : (T)Model.Deserialize(new MemoryStream(value.Wraper), null, Identifier.GetTypeById(value.Id));
+                : (T)Model.Deserialize(new MemoryStream(value.Wraper), null, Identifier.GetTypeById(value.Id.ToByteArray()));
         }
 
         public static implicit operator RuntimeProxy<T, V>(T value)
