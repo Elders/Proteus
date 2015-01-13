@@ -1,3 +1,6 @@
+#### 1.0.6 - 13.01.2015
+* Fixes Guid issue on the runtime proxy/surrogate
+
 #### 1.0.5 - 12.01.2015
 * Properly deserialize empty collections
 
