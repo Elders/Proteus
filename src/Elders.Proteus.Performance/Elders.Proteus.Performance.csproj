@@ -32,8 +32,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Elders.Protoreg">
-      <HintPath>..\packages\Protoreg.1.0.10\lib\Elders.Protoreg.dll</HintPath>
+    <Reference Include="CapnProto-net">
+      <HintPath>..\packages\CapnProto-net.0.0.8\lib\net45\CapnProto-net.dll</HintPath>
+    </Reference>
+    <Reference Include="Elders.Cronus.DomainModeling">
+      <HintPath>..\packages\Cronus.DomainModeling.1.2.3\lib\net45-full\Elders.Cronus.DomainModeling.dll</HintPath>
+    </Reference>
+    <Reference Include="Elders.Protoreg, Version=1.0.11.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Protoreg.1.0.11\lib\net45-full\Elders.Protoreg.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="protobuf-net">
       <HintPath>..\packages\protobuf-net.2.0.0.668\lib\net40\protobuf-net.dll</HintPath>
@@ -48,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class2.cs" />
     <Compile Include="MeasureExecutionTime.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -57,6 +68,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Elders.Proteus.Tests.Models\Elders.Proteus.Tests.Models.csproj">
+      <Project>{18724f0f-fe76-4a5d-8a87-c1fc323b3179}</Project>
+      <Name>Elders.Proteus.Tests.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Elders.Proteus\Elders.Proteus.csproj">
       <Project>{91eb64b8-23cc-4a6a-a85b-9c3b39b415f5}</Project>
       <Name>Elders.Proteus</Name>

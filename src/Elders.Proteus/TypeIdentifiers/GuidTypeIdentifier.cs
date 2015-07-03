@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Elders.Proteus
 {
@@ -18,8 +15,6 @@ namespace Elders.Proteus
 
         public GuidTypeIdentifier(params Assembly[] assemblies)
         {
-            Ids = new Dictionary<Type, string>();
-            Types = new Dictionary<string, Type>();
             foreach (var hostAssembly in assemblies)
             {
                 var refercendAssemblies = hostAssembly.GetReferencedAssemblies();
@@ -57,9 +52,7 @@ namespace Elders.Proteus
                     throw new InvalidDataContractException(message);
                 }
                 ids.Add(item, gd);
-                Ids.Add(item, gd.ToString());
                 types.Add(gd, item);
-                Types.Add(gd.ToString(), item);
             }
         }
 
@@ -76,7 +69,7 @@ namespace Elders.Proteus
             }
 
         }
-       
+
         public Type GetTypeById(byte[] id)
         {
             Type type = null;
@@ -91,9 +84,5 @@ namespace Elders.Proteus
         public bool IsDynamicLenght { get { return false; } }
 
         public int Lenght { get { return 16; } }
-
-
-        public Dictionary<string, Type> Types { get; private set; }
-        public Dictionary<Type, string> Ids { get; private set; }
     }
 }

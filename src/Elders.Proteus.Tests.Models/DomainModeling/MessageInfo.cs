@@ -128,20 +128,6 @@ namespace Elders.Cronus.DomainModeling
             return t.GetMembers(flags).Concat(GetAllMembers(t.BaseType));
         }
 
-        public static bool HasAttribute<TAttribute>(this ICustomAttributeProvider self)
-        {
-            return self
-                .GetCustomAttributes(false)
-                .Where(x => x is TAttribute)
-                .Any();
-        }
-
-        public static TResultType GetAttrubuteValue<TAttribute, TResultType>(this ICustomAttributeProvider self, Func<TAttribute, TResultType> get)
-        {
-            TAttribute attribute = (TAttribute)self.GetCustomAttributes(typeof(TAttribute), false).Single();
-            return get(attribute);
-        }
-
         private static object GetValue(object instance, MemberInfo member)
         {
             if (member is PropertyInfo)

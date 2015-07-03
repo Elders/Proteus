@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using Elders.Cronus.DomainModeling;
 using Elders.Protoreg;
 using ProtoBuf.Meta;
 
@@ -30,7 +31,7 @@ namespace Elders.Proteus.Performance
         public int IntProp { get; set; }
 
         [DataMember(Order = 3)]
-        public object Nested { get; set; }
+        public List<SimpleObject> Nested { get; set; }
     }
     class Program
     {
@@ -45,10 +46,16 @@ namespace Elders.Proteus.Performance
             protoreg = new Protoreg.ProtoregSerializer(protoRegistration);
             protoreg.Build();
             var simpleObject = new SimpleObject() { IntProp = 1000, StringProp = "Test string" };
-            var complex = new ComplexObjectGraph() { IntProp = 1001, StringProp = "test", Nested = simpleObject };
+            var complex = new ComplexObjectGraph() { IntProp = 1001, StringProp = "test", Nested = new List<SimpleObject>() };
             //MeasureDeserialization("Deserialization Simple Object 1000000 times ", simpleObject, 1000000);
             //MeasureSerialization("Serializing Simple Object 1000000 times ", simpleObject, 1000000);
             RuntimeTypeModel.Default.Add(typeof(object), true).AddSubType(500, typeof(SimpleObject));
+
+
+
+
+
+
             MeasureDeserialization("Deserialization Complex Object 1000000 times ", complex, 100000);
             MeasureSerialization("Serializing Complex Object 1000000 times ", complex, 100000);
 
@@ -62,6 +69,9 @@ namespace Elders.Proteus.Performance
             var proteusResult = MeasureExecutionTime.Start(() => guidProteus.SerializeWithHeaders(new MemoryStream(), instance), numberofTimes);
             Console.WriteLine("Guid Proteus: " + proteusResult);
 
+            var jsonSer = new Json(new ContractsRepository(typeof(SimpleObject).Assembly.GetTypes().Where(x => x.HasAttribute<DataContractAttribute>())));
+            var jsonResult = MeasureExecutionTime.Start(() => jsonSer.Serialize(instance), numberofTimes);
+            Console.WriteLine("Json Net : " + jsonResult);
             //stringProteus.SerializeWithHeaders(new MemoryStream(), instance);
             //var sproteusResult = MeasureExecutionTime.Start(() => stringProteus.SerializeWithHeaders(new MemoryStream(), instance), numberofTimes);
             //Console.WriteLine("String Proteus: " + sproteusResult);
