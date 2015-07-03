@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace Elders.Cronus.DomainModeling
 {
@@ -8,12 +11,18 @@ namespace Elders.Cronus.DomainModeling
         protected TState state;
         protected List<IEvent> uncommittedEvents;
         private int revision;
+        private Dictionary<Type, Action<IEvent>> handlers;
 
         public AggregateRoot()
         {
             state = new TState();
+            var dynamicState = (dynamic)state;
+            dynamicState.Root = (dynamic)this;
             uncommittedEvents = new List<IEvent>();
             revision = 0;
+
+            var mapping = new DomainObjectEventHandlerMapping();
+            handlers = mapping.GetEventHandlers(() => this.state);
         }
 
         IAggregateRootState ICanRestoreStateFromEvents<IAggregateRootState>.State { get { return state; } }
@@ -27,7 +36,8 @@ namespace Elders.Cronus.DomainModeling
             state = new TState();
             foreach (IEvent @event in events)
             {
-                state.Apply(@event);
+                var handler = handlers[@event.GetType()];
+                handler(@event);
             }
             this.revision = revision;
 
@@ -35,10 +45,16 @@ namespace Elders.Cronus.DomainModeling
                 throw new AggregateRootException("Invalid aggregate root state. The initial event which created the aggregate root is missing.");
         }
 
-        protected void Apply(IEvent @event)
+        internal protected void Apply(IEvent @event)
         {
-            state.Apply(@event);
+            var handler = handlers[@event.GetType()];
+            handler(@event);
             uncommittedEvents.Add(@event);
+        }
+
+        void ICanRestoreStateFromEvents<IAggregateRootState>.RegisterEventHandler(Type eventType, Action<IEvent> handleAction)
+        {
+            handlers.Add(eventType, handleAction);
         }
     }
 }

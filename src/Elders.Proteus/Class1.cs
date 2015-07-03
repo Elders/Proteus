@@ -27,12 +27,24 @@ namespace Elders.Proteus
                 return;
             var metaBase = model.Add(type.Type.BaseType, true);
             model.IncludeParents(typeIdentifier, metaBase);
-            if (typeIdentifier.AvailableTypes.Contains(type.Type.BaseType))
+
+            if (IsRegisteredType(typeIdentifier, type) || IsRegisteredGenericType(typeIdentifier, type))
                 foreach (var field in metaBase.GetFields())
                 {
                     if (!type.GetFields().Select(x => x.FieldNumber).Contains(field.FieldNumber))
                         type.AddField(field.FieldNumber, field.Member.Name);
                 }
+        }
+
+        private static bool IsRegisteredType(ITypeIdentifier typeIdentifier, MetaType type)
+        {
+            return typeIdentifier.AvailableTypes.Contains(type.Type.BaseType);
+        }
+
+        private static bool IsRegisteredGenericType(ITypeIdentifier typeIdentifier, MetaType type)
+        {
+            return type.Type.BaseType.IsGenericType && typeIdentifier.AvailableTypes.Contains(type.Type.BaseType.GetGenericTypeDefinition());
+
         }
 
     }
