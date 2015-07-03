@@ -1,3 +1,6 @@
+#### 1.0.7 - 03.07.2015
+* Fixes Registration for BASE Generic Types
+
 #### 1.0.6 - 13.01.2015
 * Fixes Guid issue on the runtime proxy/surrogate
 
