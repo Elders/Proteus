@@ -18,7 +18,7 @@ namespace Elders.Cronus.DomainModeling
             if (idBase == default(Guid)) throw new ArgumentException("Default guid value is not allowed.", "idBase");
             Id = idBase;
             var entityBytes = ByteArrayHelper.Combine(UTF8Encoding.UTF8.GetBytes(EntityName + "@"), Id.ToByteArray());
-            var rootBytes = ByteArrayHelper.Combine(UTF8Encoding.UTF8.GetBytes("@@"), AggregateRootId.RawId);
+            var rootBytes = ByteArrayHelper.Combine(UTF8Encoding.UTF8.GetBytes("@@"), RootId.RawId);
             base.RawId = ByteArrayHelper.Combine(entityBytes, rootBytes);
         }
 
@@ -28,7 +28,7 @@ namespace Elders.Cronus.DomainModeling
             if (!IsValid(idBase)) throw new ArgumentException("Default guid value is not allowed.", "idBase");
             Id = idBase.Id;
             var entityBytes = ByteArrayHelper.Combine(UTF8Encoding.UTF8.GetBytes(EntityName + "@"), Id.ToByteArray());
-            var rootBytes = ByteArrayHelper.Combine(UTF8Encoding.UTF8.GetBytes("@@"), AggregateRootId.RawId);
+            var rootBytes = ByteArrayHelper.Combine(UTF8Encoding.UTF8.GetBytes("@@"), RootId.RawId);
             base.RawId = ByteArrayHelper.Combine(entityBytes, rootBytes);
         }
 
@@ -39,7 +39,7 @@ namespace Elders.Cronus.DomainModeling
 
         public override string ToString()
         {
-            return EntityName + "@" + Id.ToString() + "@@" + AggregateRootId.ToString() + "||" + base.ToString();
+            return EntityName + "@" + Id.ToString() + "@@" + RootId.ToString() + "||" + base.ToString();
         }
     }
 
