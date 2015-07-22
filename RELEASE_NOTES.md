@@ -1,3 +1,6 @@
+#### 1.0.8 - 22.07.2015
+* Fix error message when duplicated contracts were found.
+
 #### 1.0.7 - 03.07.2015
 * Fixes Registration for BASE Generic Types
 
