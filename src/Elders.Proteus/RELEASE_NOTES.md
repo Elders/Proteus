@@ -1,3 +1,6 @@
+#### 1.0.9 - 18.02.2016
+* Assembly loading mode to control the startup times.
+
 #### 1.0.8 - 22.07.2015
 * Fix error message when duplicated contracts were found.
 
