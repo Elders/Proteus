@@ -20,8 +20,8 @@ namespace Elders.Proteus.Tests
             var value = new UndefinedDictionaryInheritance() { String = "value", Nested = new UndefinedDictionaryInheritance() { String = "Nested value" } };
             ser.Nested.Add(key, value);
 
-            serializer = new Serializer();
-            serializer2 = new Serializer();
+            serializer = new Serializer(new GuidTypeIdentifier(typeof(NestedType).Assembly));
+            serializer2 = new Serializer(new GuidTypeIdentifier(typeof(NestedType).Assembly));
             serStream = new MemoryStream();
             serializer.SerializeWithHeaders(serStream, ser);
             serStream.Position = 0;

@@ -67,8 +67,8 @@ namespace Elders.Proteus.Tests.custom_cases
             {
                 ser = new SerializableException(ex);
             }
-            serializer = new Serializer();
-            serializer2 = new Serializer();
+            serializer = new Serializer(new GuidTypeIdentifier(typeof(NestedType).Assembly, typeof(Whem_SerializableException).Assembly));
+            serializer2 = new Serializer(new GuidTypeIdentifier(typeof(NestedType).Assembly, typeof(Whem_SerializableException).Assembly));
             serStream = new MemoryStream();
             serializer.SerializeWithHeaders(serStream, ser);
             serStream.Position = 0;

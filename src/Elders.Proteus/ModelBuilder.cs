@@ -8,7 +8,6 @@ namespace Elders.Proteus
 {
     public static class ModelBuilder
     {
-
         public static RuntimeTypeModel New()
         {
             CultureInfo culture = CultureInfo.InvariantCulture; // use InvariantCulture or other if you prefer
@@ -41,8 +40,6 @@ namespace Elders.Proteus
         private static bool IsRegisteredGenericType(ITypeIdentifier typeIdentifier, MetaType type)
         {
             return type.Type.BaseType.IsGenericType && typeIdentifier.AvailableTypes.Contains(type.Type.BaseType.GetGenericTypeDefinition());
-
         }
-
     }
 }

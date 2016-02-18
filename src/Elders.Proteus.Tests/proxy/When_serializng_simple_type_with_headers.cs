@@ -36,7 +36,7 @@ namespace Elders.Proteus.Tests.proxy
         {
             ser = new ToProxy() { TestProperty = "aaaa" };
             ser.SetStuff();
-            serializer = new Serializer();
+            serializer = new Serializer(new GuidTypeIdentifier(typeof(NestedType).Assembly, typeof(When_serializng_simple_type_with_headers).Assembly));
             serStream = new MemoryStream();
             serializer.SerializeWithHeaders(serStream, ser);
             serStream.Position = 0;

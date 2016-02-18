@@ -15,7 +15,7 @@ namespace Elders.Proteus.Tests
         Establish context = () =>
         {
             ser = new SimpleType() { Int = 5, Date = DateTime.UtcNow.AddDays(1), String = "a" };
-            serializer = new Serializer();
+            serializer = new Serializer(new GuidTypeIdentifier(typeof(NestedType).Assembly));
             serStream = new MemoryStream();
             serializer.Serialize(serStream, ser);
             serStream.Position = 0;

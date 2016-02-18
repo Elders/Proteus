@@ -14,7 +14,7 @@ namespace Elders.Proteus.Tests.runtime_type_discovery
         Establish context = () =>
         {
             ser = new SimpleTypeWithHeaders() { Int = 5, Date = DateTime.UtcNow.AddDays(1), String = "a" };
-            serializer = new Serializer();
+            serializer = new Serializer(new GuidTypeIdentifier(typeof(NestedType).Assembly));
             serStream = new MemoryStream();
             serializer.SerializeWithHeaders(serStream, ser);
             serStream.Position = 0;

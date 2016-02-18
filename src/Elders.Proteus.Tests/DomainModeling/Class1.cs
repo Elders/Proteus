@@ -21,8 +21,8 @@ namespace Elders.Proteus.Tests.custom_cases
         Establish context = () =>
         {
             ser = new WorkId(WorkGuid, new JobId(JobId));
-            serializer = new Serializer(new GuidTypeIdentifier(typeof(WorkId).Assembly));
-            serializer2 = new Serializer(new GuidTypeIdentifier(typeof(WorkId).Assembly));
+            serializer = new Serializer(new GuidTypeIdentifier(typeof(WorkId).Assembly, typeof(Whem_EntityId).Assembly));
+            serializer2 = new Serializer(new GuidTypeIdentifier(typeof(WorkId).Assembly, typeof(Whem_EntityId).Assembly));
             serStream = new MemoryStream();
             serializer.SerializeWithHeaders(serStream, ser);
             serStream.Position = 0;

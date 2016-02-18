@@ -17,8 +17,8 @@ namespace Elders.Proteus.Tests
         {
             ser = new C() { CString = "C", Aprop = new A() { AString = "A" } };
 
-            serializer = new Serializer();
-            serializer2 = new Serializer();
+            serializer = new Serializer(new GuidTypeIdentifier(typeof(NestedType).Assembly, typeof(Whem_stackoverflow).Assembly));
+            serializer2 = new Serializer(new GuidTypeIdentifier(typeof(NestedType).Assembly, typeof(Whem_stackoverflow).Assembly));
             serStream = new MemoryStream();
             serializer.SerializeWithHeaders(serStream, ser);
             serStream.Position = 0;

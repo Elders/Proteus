@@ -15,7 +15,7 @@ namespace Elders.Proteus.Tests
         Establish context = () =>
         {
             ser = new NestedType() { Int = 5, Date = DateTime.UtcNow.AddDays(1), String = "a", Nested = new SimpleNestedType() { Int = 4, Date = DateTime.UtcNow.AddDays(2), String = "b" } };
-            serializer = new Serializer();
+            serializer = new Serializer(new GuidTypeIdentifier(typeof(NestedType).Assembly));
             serStream = new MemoryStream();
             serializer.Serialize(serStream, ser);
             serStream.Position = 0;

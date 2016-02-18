@@ -6,6 +6,19 @@ using System.Runtime.Serialization;
 
 namespace Elders.Proteus
 {
+    public enum AssemlbyLoadMode
+    {
+        /// <summary>
+        /// Registers for serailziation all referenced assemblies(including mscorelib,System.Web etc.)
+        /// </summary>
+        ReferencedAssemblies,
+
+        /// <summary>
+        /// Registers for serailziation only the spceified assemblies
+        /// </summary>
+        Explicit
+    }
+
     public class GuidTypeIdentifier : ITypeIdentifier
     {
         HashSet<Assembly> assembliesWithDataContracts = new HashSet<Assembly>();
@@ -13,21 +26,29 @@ namespace Elders.Proteus
         private Dictionary<Type, Guid> ids = new Dictionary<Type, Guid>();
         public IEnumerable<Type> AvailableTypes { get { return types.Select(x => x.Value); } }
 
-        public GuidTypeIdentifier(params Assembly[] assemblies)
+        public GuidTypeIdentifier(AssemlbyLoadMode loadMode, params Assembly[] assemblies)
         {
             foreach (var hostAssembly in assemblies)
             {
-                var refercendAssemblies = hostAssembly.GetReferencedAssemblies();
-                assembliesWithDataContracts.Add(hostAssembly);
-                foreach (var item in refercendAssemblies)
+                if (loadMode == AssemlbyLoadMode.ReferencedAssemblies)
                 {
-                    assembliesWithDataContracts.Add(Assembly.Load(item));
+                    var refercendAssemblies = hostAssembly.GetReferencedAssemblies();
+                    foreach (var item in refercendAssemblies)
+                    {
+                        assembliesWithDataContracts.Add(Assembly.Load(item));
+                    }
                 }
+                assembliesWithDataContracts.Add(hostAssembly);
             }
             foreach (var item in assembliesWithDataContracts)
             {
                 DiscoverDataContracts(item);
             }
+
+        }
+
+        public GuidTypeIdentifier(params Assembly[] assemblies) : this(AssemlbyLoadMode.Explicit, assemblies)
+        {
 
         }
 
